@@ -1,6 +1,8 @@
 import os
 import streamlit as st
 from langchain_google_genai import GoogleGenerativeAIEmbeddings 
+from langchain_core.runnables import RunnablePassthrough
+
 from  dotenv import load_dotenv
 load_dotenv()
 # Document Loaders
@@ -88,6 +90,15 @@ from langchain_core.output_parsers import StrOutputParser
 parser = StrOutputParser()
 
 final_result = model.invoke(prompt)
-answer = parser.invoke(final_result)
+rag_chain = (
+    {
+        "context": retriever,
+        "question": RunnablePassthrough()
+    }
+    | template
+    | model
+    | parser
+)
+answer = rag_chain.invoke(final_result)
 
 print(answer)
