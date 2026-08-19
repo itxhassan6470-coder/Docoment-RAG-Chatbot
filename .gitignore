@@ -1,5 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environment
 venv/
+.venv/
+env/
+
+# Environment variables
 .env
-Muhammad_Hassan_Resume .pdf
-__pycache__
-chroma_db
+
+# Chroma database
+chroma_db/
+
+# Other generated files
+*.log
